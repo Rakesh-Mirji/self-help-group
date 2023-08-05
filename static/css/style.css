@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+}
+.hide{
+    display: none;
+}
+   :root{
+    --main-bg-color:black;
+   }
+   body {
+    color: var(--main-bg-color);
+  }
+  

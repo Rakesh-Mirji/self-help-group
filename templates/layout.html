@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+ <title>{% block title %}{% endblock %} - SHG</title> 
+ <link rel="stylesheet"  href="/static/css/style.css">
+ <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet"> 
+ <script src="https://cdn.tailwindcss.com"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body class="bg-[url('/static/images/web2.png')] bg-no-repeat fixed min-h-screen w-screen">
+   <header class="bg-blue-800 text-white h-16">
+      <nav class="h-full w-screen " id="bs-example-navbar-collapse-1">
+         <ul class="h-full flex items-center jutify-end gap-10 w-full">
+            <div class="logo"><img class="object-cover h-8 w-8 rotate-45" src="/static/images/logo.png" alt="SHG"></div>
+            <div class="text-[1.2rem]"><a href="{{ url_for('main') }}">Index</a></div>
+            <div class="text-[1.2rem]"><a href="{{ url_for('approve') }}">Approvals</a></div>
+            {% if g.user %}
+            <div class="text-[1.2rem]"><a href="{{ url_for('signout') }}">Sign Out</a></div>
+            {% else %}
+            <div class="text-[1.2rem]"><a href="{{ url_for('signin') }}">Sign In</a></div>
+            {% endif %}
+         </ul>
+      </nav> 
+      </header>
+      <div class="min-h-screen w-screen ">
+         {% block content %}{% endblock %}
+      </div>
+      {% block script %}{% endblock %}
+   
+</body>
+</html>
+   

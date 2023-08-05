@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block title %}Sign in{% endblock %}
+{% block content %}
+<div class="absolute top-[35%] left-[35%] ">
+<form class="px-10 p-5 border-2 border-black rounded-[10px] h-max w-max" id="signin" autocomplete="off" method="POST">
+    <h2 class="text-[3.5rem] font-bold ">Please sign in</h2>
+    {% if error %}
+    <p class="text-red-500" id="error"><span class="" aria-hidden="true"></span>{{ error }}</p>
+    {% endif %}
+    <script>
+        $(function() {
+            setTimeout(function(){$("#error").css("display", "none")},2000)
+            }
+        );
+    </script>
+    <div class="flex justify-center">
+        <input type="text" name="username" id="username" class="p-3 text-[20px] outline outline-offset-1 outline-slate-300 focus:outline-blue-500 m-3 rounded-lg" placeholder="Username" required autofocus>
+    </div>
+    <div class="flex justify-center">
+        <input type="password" name="password" id="password" class="p-3 text-[20px] outline outline-offset-1 outline-slate-300 focus:outline-blue-500 m-3 rounded-lg" placeholder="Password" required>
+    </div>
+    <div class="flex justify-around" id="log">
+        <input type="radio" name="role" id="admin" value="ADMIN" class="hidden" required>
+        <label for="admin" class="text-center text-[1.2rem] p-3 w-28 rounded-[50px]" id="admin_select" >Admin</label>
+
+        <input type="radio" name="role" id="user" value="USER" class="hidden" required>
+        <label for="user" class="text-center text-[1.2rem] p-3 w-28 rounded-[50px]" id="user_select">User</label>
+    </div>
+    <script>
+        $( "#log" ).on("click",function() {
+            if($('#admin').prop("checked")){
+                $('#admin_select').css('background','lightblue')
+                $('#user_select').css('background','transparent')
+            }
+            else{
+                $('#admin_select').css('background-color','transparent')
+                $('#user_select').css('background','lightblue')
+            }
+            console.log('not');
+        });
+    </script>
+    <div class="mt-2 flex justify-center ">
+        <input type="submit" value="Sign In" class="rounded-lg w-1/2 p-3 font-[1rem] bg-blue-200 cursor-pointer border-2 border-blue-300">
+    </div>
+</form>
+<p class="text-end">Don't have a account  ?  <a class="text-blue-500 hover:text-blue-700" href="{{ url_for('signup') }}">Sign Up</a></p>
+</div>
+{% endblock %}
+
