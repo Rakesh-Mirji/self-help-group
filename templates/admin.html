@@ -2,9 +2,37 @@
 {% block title %}admin{% endblock %}
 {% block content %}
 
-<div class="row">
-    <h1>HI Admin !</h1>
+<div class="">
+    <h1 class="p-5 text-[1.7rem] font-semibold">Self Help Group</h1>
+    <p class="p-5 text-[1.2rem] font-Medium ">Account Details</p>
+    <table class="w-full bg-lime-400/80">
+    <tr class="border-b-2 border-slate-500"><th>Account Number</th><th>Account Balance</th><th>Account Status</th></tr>
+    {% for data in account %}
+        <tr class="p-5 text-center">
+            <td class="p-3">{{data.account_no}}</td>
+            <td>{{data.balance}}</td>
+            <td>{{data.status.capitalize()}}</td>
+        </tr>  
+    {% endfor %}
+</table>
+<div class="flex justify-center pt-10 text-[1.2rem] font-Medium">User Details</div>
+<div class="flex justify-center p-2 ">
+    {% if users %}
+    <table class="w-[70%] bg-white rounded-2xl">
+        <tr class="border-b-2 border-slate-500"><th class="p-2">User Name</th><th>User Address</th><th>User Phone Number</th><th>Verified</th></tr>
+        {% for user in users %}
+        <tr class="p-5 text-center">
+            <td class="p-2">{{user.username.capitalize()}}</td>
+            <td>{{user.address.capitalize()}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.verified}}</td>
+        </tr>  
+        {% endfor %}
+    </table>
+    {% else %}
+    <div class="text-center">No users in the DateBase </div>
+    {% endif %}
 </div>
-
+</div>
 
 {% endblock %}

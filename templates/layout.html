@@ -4,28 +4,33 @@
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
- <title>{% block title %}{% endblock %} - SHG</title> 
- <link rel="stylesheet"  href="/static/css/style.css">
+ <title>{% block title %}{% endblock %}</title> 
+ <link rel = "icon" href = "/static/images/icon.png" type = "image/x-icon">
+ <link rel="stylesheet" href="/static/css/style.css">
  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet"> 
  <script src="https://cdn.tailwindcss.com"></script>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
-<body class="bg-[url('/static/images/web2.png')] bg-no-repeat fixed min-h-screen w-screen">
-   <header class="bg-blue-800 text-white h-16">
-      <nav class="h-full w-screen " id="bs-example-navbar-collapse-1">
-         <ul class="h-full flex items-center jutify-end gap-10 w-full">
-            <div class="logo"><img class="object-cover h-8 w-8 rotate-45" src="/static/images/logo.png" alt="SHG"></div>
-            <div class="text-[1.2rem]"><a href="{{ url_for('main') }}">Index</a></div>
-            <div class="text-[1.2rem]"><a href="{{ url_for('approve') }}">Approvals</a></div>
-            {% if g.user %}
-            <div class="text-[1.2rem]"><a href="{{ url_for('signout') }}">Sign Out</a></div>
-            {% else %}
-            <div class="text-[1.2rem]"><a href="{{ url_for('signin') }}">Sign In</a></div>
+<body class="bg-[url('/static/images/slider-bg.jpg')] bg-fixed bg-cover bg-no-repeat min-h-[80vh] w-screen overflow-x-hidden">
+   <header class=" bg-lime-600 text-white h-16">
+      <nav class="h-full w-full" id="bs-example-navbar-collapse-1">
+         {% if 'user' in session %}
+         <ul class="h-full flex items-center justify-evenly  w-full">
+         {% else %}
+         <ul class="h-full flex items-center justify-start w-full">
+         {% endif %}
+            <a href="{{ url_for('about') }}">
+               <div class="p-2"><img class="rounded-full bg-white object-cover h-16 w-16" src="/static/images/icon.png" alt="SHG"></div>
+            </a>
+            {% if 'user' in session %}
+            <div class="max-lg:text-[1rem] text-[1.2rem]"><a href="{{ url_for('main') }}">Index</a></div>
+            <div class="max-lg:text-[1rem] text-[1.2rem]"><a href="{{ url_for('approve') }}">Approvals</a></div>
+            <div class="max-lg:text-[1rem] text-[1.2rem]"><a href="{{ url_for('signout') }}">Sign Out</a></div>
             {% endif %}
          </ul>
       </nav> 
       </header>
-      <div class="min-h-screen w-screen ">
+      <div class="w-screen ">
          {% block content %}{% endblock %}
       </div>
       {% block script %}{% endblock %}
