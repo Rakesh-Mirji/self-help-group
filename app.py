@@ -134,7 +134,6 @@ def main():
 @app.route('/approve/', methods=['GET', 'POST'])
 def approve():
     if 'user' in session: # check for user session
-        users = dbsession.query(Users).filter(Users.verified == False).all()
         if request.method == 'POST':
             try:
                 verifed_id = request.form['user_id']
@@ -153,6 +152,7 @@ def approve():
             except:
                 dbsession.rollback()
                 print("An exception occurred")
+        users = dbsession.query(Users).filter(Users.verified == False).all()
         return render_template('approve.html',approves=users)
     return redirect(url_for('about'))
 

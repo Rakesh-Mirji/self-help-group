@@ -6,8 +6,8 @@
     <p class="text-5xl  text-shadow-lg drop-shadow-lg font-medium " >GROUP</p> 
     <a href="{{ url_for('signin') }}"><p class="w-[100px] text-center mt-5 p-1 bg-black text-white text-[1.2rem]">Sign In</p></a>
   </div>
-  <div class="h-[70vh]">
-    <img src="/static/images/slider-img.png" alt="" class="absolute bottom-0 w-[80%]">
+  <div class="h-[70vh] max-sm:hidden ">
+    <img src="/static/images/slider-img1.png" alt="" class="absolute bottom-0 right-0 w-[80%]">
   </div>
   <div class="w-3/4 h-3/4 " style="
   mask-image: url(static/images/blog-featured-image-mask.svg);
@@ -53,9 +53,9 @@
       </ul>
     </div>
   </div>
-  <div class="mx-10 flex justify-evenly w-[95vw] ">
+  <div class="mx-10 max-sm:flex-wrap max-sm:mx-2 flex justify-evenly w-[95vw] ">
     <img class="object-contain bg-no-repeat bg-contain w-[50vw]" src="/static/images/tree2.png" alt=""> 
-    <div class='flex items-center object-contain bg-no-repeat bg-contain w-full' >
+    <div class='flex justify-center items-center object-contain bg-no-repeat bg-contain w-full' >
       <div class="">
       <h3 class="text-2xl text-center font-medium leading-7">
         Goal
@@ -73,7 +73,7 @@
     </div>
   </div>
   </div>
-  <div class="mx-10 flex justify-evenly w-[95vw]">
+  <div class="mx-10 max-sm:flex-wrap max-sm:mx-2 flex justify-evenly w-[95vw]">
     <div  class="flex items-center object-contain bg-no-repeat bg-contain w-full">
       <div>
       <h3 class="text-2xl text-center font-medium leading-7">
@@ -90,7 +90,7 @@
   </div>
     <img class='object-contain bg-no-repeat bg-contain w-[50vw]' src="/static/images/group3.png" alt="">
   </div>
-  <div class="mx-10 flex justify-evenly w-[95vw]">
+  <div class="mx-10 max-sm:flex-wrap max-sm:flex-wrap max-sm:mx-2 flex justify-evenly w-[95vw]">
     <img class='object-contain bg-no-repeat bg-contain w-[50vw]' src="/static/images/tree1.png" alt=""> 
     <div class='flex items-center object-contain bg-no-repeat bg-contain w-full'>
       <div>
