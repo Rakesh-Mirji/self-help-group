@@ -2,9 +2,41 @@
 {% block title %}index{% endblock %}
 {% block content %}
 
-<div class="">
-    <h1>You are logged in !</h1>
+<div class="row">
+    <h1 class="p-5 text-[1.7rem] font-semibold">Hello {{users[0].username.capitalize()}}</h1>
+    <p class="p-5 text-[1.2rem] font-Medium ">Account Details</p>
+    <div class="flex justify-center ">
+        <div class="max-md:w-[85%] max-lg:w-[50%] shadow-lg hover:shadow-xl border-2 border-black rounded-2xl p-3 w-[30%] bg-[url('/static/images/card1.jpg')] bg-left-bottom bg-cover bg-no-repeat">
+            {% for data in account %}
+            <p class="text-sm">Account Number</p>
+            <p class="max-md:text-lg pb-4 text-2xl">{{data.account_no}}</p>
+            <div class="border-[1px] flex bg-white rounded-3xl mx-[5%] p-2 justify-between items-center">
+                <p class="text-sm">Account Balance</p>
+                <p class="balance text-xl"> ₹ {{data.balance}}</p>
+                <img src="static/images/view.svg" alt="" class="eye">
+            </div>
+            <div class="max-md:text-sm text-white mt-3 flex justify-between items-center">
+                <p class="border-2 border-white rounded-3xl p-2">Status : {{data.status.capitalize()}}</p> 
+                <!-- <p class="font-bold text-center border-2 border-white rounded-full w-10 p-2 cursor-pointer">i</p> -->
+                <p><a href="{{ url_for('transactions') }}" class="border-2 border-white rounded-3xl p-2">Recent Transactions</a></p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+<div class="flex justify-center pt-10 text-[1.2rem] font-Medium">My Details</div>
+<div class="flex justify-center p-2 ">
+    <table class="max-md:w-[80%] table-fixed w-[70%] bg-white rounded-2xl">
+        <tr class="max-md:text-sm border-b-2 border-slate-500"><th class="p-2">User Name</th><th>User Address</th><th>User Phone Number</th><th>Verified</th></tr>
+        {% for user in users %}
+        <tr class="max-md:text-sm p-5 text-center">
+            <td class="p-2">{{user.username.capitalize()}}</td>
+            <td>{{user.address.capitalize()}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.verified}}</td>
+        </tr>  
+        {% endfor %}
+    </table>
 </div>
-
-
+<!-- <div class="flex justify-center pt-10 text-[1.2rem] font-Medium">Nominee pinalty</div> -->
+</div>
 {% endblock %}

@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block title %}Chat{% endblock %}
+{% block content %}
+        <div class="fixed bottom-0" >
+            <div class="px-5 flex overflow-y-auto flex-col-reverse h-[70vh]" style="scrollbar-width: none">
+                {% if chats %}
+                    {% for chat in chats %}
+                        {% if chat.user_id==session['id'] %}
+                        <div class="flex gap-3 p-3 m-2 max-w-[60vw] text-white self-end border-2 border-green-300 bg-green-700 rounded-b-2xl rounded-tl-2xl">
+                            <div class="text-lg">{{chat.message}}</div>
+                            <div class="flex flex-col justify-end">
+                                <p class="text-[10px] text-slate-300">{{chat.date.strftime('%x')}}</p>
+                                <p class="text-[10px] text-slate-300">{{chat.date.strftime('%I:%M%p')}}</p>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="p-3 m-2 max-w-[60vw] self-start text-white bg-slate-700 border-2 rounded-b-2xl rounded-tr-2xl">
+                            <div class="flex justify-between gap-5 ">
+                                {% for user in users %}
+                                    {% if chat.user_id==user.id %}
+                                        <span class="font-medium"><em>{{user.username}}</em></span>
+                                        <span class="text-slate-300">+91 {{user.phone}}</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="flex gap-5 justify-between">
+                                <span class="text-lg">{{chat.message}}</span>
+                                <div class="flex flex-col justify-end">
+                                    <p class="text-[10px] text-slate-300">{{chat.date.strftime('%x')}}</p>
+                                    <p class="text-[10px] text-slate-300">{{chat.date.strftime('%I:%M%p')}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <form method="POST">
+                <div class="flex justify-end items-center p-2 px-4 bg-slate-800 w-screen">
+                    <textarea type="text" name="message" id="message" class="resize-none max-h-12 w-[80vw] p-2 text-[15px] outline outline-offset-1 outline-slate-300 focus:outline-amber-400 m-3 rounded-lg" placeholder="Type a message" required autofocus>
+                        </textarea>
+                    <button id="verify" type="submit" class="p-1 bg-green-500 text-white rounded-[20px]"><img src="/static/images/send.svg" class="object-cover h-10"></button>
+                </div>
+            </form>
+        </div>
+{% endblock %}

@@ -4,32 +4,70 @@
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
- <title>{% block title %}{% endblock %} - SHG</title> 
- <link rel="stylesheet"  href="/static/css/style.css">
+ <title>{% block title %}{% endblock %}</title> 
+ <link rel = "icon" href = "/static/images/icon.png" type = "image/x-icon">
+ <link rel="stylesheet" href="/static/css/style.css">
  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet"> 
  <script src="https://cdn.tailwindcss.com"></script>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+ <style>
+   .truck{
+      animation: move 7s linear infinite;
+   }
+
+@keyframes move {
+  from {
+    transform: translateX(0);
+  }
+  to {   
+   transform: translateX(100vw);
+  }
+}
+ </style>
 </head>
-<body class="bg-[url('/static/images/web2.png')] bg-no-repeat fixed min-h-screen w-screen">
-   <header class="bg-blue-800 text-white h-16">
-      <nav class="h-full w-screen " id="bs-example-navbar-collapse-1">
-         <ul class="h-full flex items-center jutify-end gap-10 w-full">
-            <div class="logo"><img class="object-cover h-8 w-8 rotate-45" src="/static/images/logo.png" alt="SHG"></div>
-            <div class="text-[1.2rem]"><a href="{{ url_for('main') }}">Index</a></div>
-            <div class="text-[1.2rem]"><a href="{{ url_for('approve') }}">Approvals</a></div>
-            {% if g.user %}
-            <div class="text-[1.2rem]"><a href="{{ url_for('signout') }}">Sign Out</a></div>
-            {% else %}
-            <div class="text-[1.2rem]"><a href="{{ url_for('signin') }}">Sign In</a></div>
+<body  class="bg-[url('/static/images/slider-bg.jpg')] bg-fixed bg-cover bg-no-repeat min-h-[80vh] w-screen overflow-x-hidden">
+   <header class="">
+      <div class="close z-[200] md:hidden fixed top-10 right-10 text-white font-semibold text-2xl">X</div>
+      <nav class="navigation max-md:bg-[url('/static/images/icon.png')] bg-cover bg-no-repeat max-md:h-16 max-md:w-16 max-md:rounded-full bg-lime-600 text-white h-14 h-full w-full" id="bs-example-navbar-collapse-1">
+         {% if 'user' in session %}
+         <ul class="relative max-md:fixed z-[100] menu max-md:hidden max-md:h-screen max-md:w-screen max-md:bg-black/70 h-full md:!flex items-center justify-evenly w-full">
+         {% else %}
+         <ul class="h-full flex items-center justify-start w-full">
+         {% endif %}
+            <div class="md:p-2 max-md:w-16">
+            <a class="" href="{{ url_for('about') }}">
+                  <img class="rounded-full bg-white object-cover h-16 w-16" src="/static/images/icon.png" alt="SHG">
+               </a>
+            </div>
+            {% if 'user' in session %}
+            <div class="text-center max-md:p-3"><a class="max-md:text-2xl max-md:font-medium max-lg:text-[1rem] text-[1.2rem]" href="{{ url_for('main') }}">Index</a></div>
+            <div class="text-center max-md:p-3"><a class="max-md:text-2xl max-md:font-medium max-lg:text-[1rem] text-[1.2rem]" href="{{ url_for('approve') }}">Approvals</a></div>
+            {% if session['user']!='admin' %}
+            <div class="text-center max-md:p-3"><a class="max-md:text-2xl max-md:font-medium max-lg:text-[1rem] text-[1.2rem]" href="{{ url_for('requests') }}">Make Requests</a></div>
+            {% endif %}
+            <div class="text-center max-md:p-3"><a class="max-md:text-2xl max-md:font-medium max-lg:text-[1rem] text-[1.2rem]" href="{{ url_for('view') }}">Loan Requests</a></div>
+            <div class="text-center max-md:p-3"><a class="max-md:text-2xl max-md:font-medium max-lg:text-[1rem] text-[1.2rem]" href="{{ url_for('transactions') }}">Transactions</a></div>
+            <div class="text-center max-md:p-3"><a class="max-md:text-2xl max-md:font-medium max-lg:text-[1rem] text-[1.2rem]" href="{{ url_for('loan') }}">Loans</a></div>
+            <div class="text-center max-md:p-3"><a class="max-md:text-2xl max-md:font-medium max-lg:text-[1rem] text-[1.2rem]" href="{{ url_for('reminder') }}">Reminder</a></div>
+            <div class="text-center max-md:p-3"><a class="max-md:text-2xl max-md:font-medium max-lg:text-[1rem] text-[1.2rem]" href="{{ url_for('chat') }}">Group Chat</a></div>
+            <div class="text-center max-md:p-3"><a class="max-md:text-2xl max-md:font-medium max-lg:text-[1rem] text-[1.2rem]" href="{{ url_for('signout') }}">Sign Out</a></div>
             {% endif %}
          </ul>
+      </ul>
       </nav> 
       </header>
-      <div class="min-h-screen w-screen ">
+      <script>
+         $('.navigation').on( "click", e => {
+            $('.menu').show()
+         })
+         $('.close').on( "click", e => {
+            $('.menu').hide()
+         })
+      </script>
+      <div class="w-screen ">
          {% block content %}{% endblock %}
       </div>
       {% block script %}{% endblock %}
-   
 </body>
 </html>
    

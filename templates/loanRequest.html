@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Loan requst{% endblock %}
+{% block content %}
+
+<div class="">
+    <div class=" min-h-[70vh] w-full flex justify-center items-center">
+        <div class="max-md:w-4/5 w-1/2 p-2 bg-white border-2 rounded-2xl shadow-lg">
+            <form method="POST" class="p-5">
+                <label for="purpose">Purpose for Loan
+                    <textarea id="purpose" name="purpose" type="text"  class="h-20 w-full resize-none border-2">
+                    </textarea>
+                </label>
+                <label for="amount">Loan amount
+                    <input id="amount" name="amount" type="number"  class=" w-full border-2"/>
+                </label>
+                <div class="p-5 flex justify-center items-center">
+                    <button type="submit" class="p-3 px-10 bg-blue-500 text-white rounded-[20px]">Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

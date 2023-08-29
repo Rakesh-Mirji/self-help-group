@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+{% block title %}Loan{% endblock %}
+{% block content %}
+
+<div class="flex justify-center pt-10 text-[1.2rem] font-Medium">My Loan</div>
+<div class="flex justify-center p-2">
+    {% if loans[0] %}
+    <table class="max-md:w-full table-fixed w-[70%] bg-white/60 rounded-2xl">
+    <tr class="max-md:text-sm border-b-2 border-slate-500"><th class="p-2">Loan Purpose</th><th>Status</th><th>Amount</th><th class="max-md:hidden">Loan Sanctioned on</th><th>Nominee's</th><th>View</th></tr>
+{% for loan in loans %}
+<tr class="max-md:text-sm detail p-5 text-center">
+    <td data-value = {{loan.purpose}} class="truncate w-10 p-5">{{loan.purpose}}</td>
+    <td data-value = {{loan.status}} >{{loan.status}}</td>
+    <td data-value = {{loan.amount}}>{{loan.amount}}</td>
+    <td class="max-md:hidden" data-value = {{loan.sanctioned_on}}>{{loan.sanctioned_on.strftime('%m/%d/%y')}}</td>
+    <td>
+        {% for nominee in nomines %}
+            {% for user in all_users %}
+                {% if user.id == nominee.nominee_id and nominee.request_id == loan.id %}
+                    {{user.username}},
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </td>
+    <td>
+        <button data-value = {{loan.id}} class = "btn hover:brightness-90 text-white bg-blue-500 p-1 px-3 border-2 shadow-lg rounded-lg">view</button> 
+    </td>
+</tr>  
+{% endfor %}
+</table>
+{% else %}
+    <div class="w-3/5 rounded-2xl p-2 border-2 shadow-lg bg-white text-center mt-20 "> No Loans made yet </div>
+{% endif %}
+</div>
+<form method = "POST">
+    <div id="select" class="h-screen w-screen bg-black/30 hidden fixed top-0 left-0">
+        <div class="max-md:left-[10%] max-md:w-4/5 p-10 border-2  w-1/3 shadow-2xl bg-white rounded-lg absolute top-[25%] left-[35%]">
+            <h1 class="close font-bold text-[20px] text-right cursor-pointer">X</h1>
+            <div class="flex pb-5 gap-1">
+                <label class="font-medium">Purpose: </label>
+                <div id="purpose"></div>
+            </div>
+            <div class="flex gap-1">
+                <label class="font-medium">Status: </label>
+                <div id="status"></div>
+            </div>
+            <div class="flex py-5 gap-1">
+                <label class="font-medium">Loan Amount: </label>
+                <div id="amount"></div>
+            </div>
+            <div class="flex pb-5 gap-1">
+                <label class="font-medium">Sanctioned On: </label>
+                <div id="sanctioned_on"></div>
+            </div>
+            <div class="flex justify-center items-center">
+                <button id="verify" type="submit" class="hidden p-3 px-10 bg-green-500 text-white rounded-[20px]">Pay</button>
+            </div>
+            <input id="request_id" name="request_id" type="hidden">
+        </div>
+    </div>
+</form>
+<script>
+    let purpose = document.getElementById('purpose')
+    let status = document.getElementById('status')
+    let amount = document.getElementById('amount')
+    let sanctioned_on = document.getElementById('sanctioned_on')
+
+
+$('.detail').on( "click", e => {
+    if(e.target.className.includes('btn')){
+        let i = $(e.target).attr('data-value')
+        info = e.currentTarget.cells
+        purpose.textContent = info[0].textContent
+        status.textContent = info[1].textContent
+        amount.textContent = info[2].textContent
+        sanctioned_on.textContent = info[3].textContent!='None' ? info[3].textContent : 'Not Sanctioned yet'
+        request_id.value = i
+
+        console.log(typeof(info[1].textContent));
+        if(info[1].textContent=='granted'){
+            $("#verify").show()
+        }
+        $(e.target.classList.toggle('bg-green-500'))
+        setTimeout(()=>{
+        $(e.target.classList.toggle('bg-green-500'))
+        },3000)
+        $('#select').show()
+    }
+    } );
+        $('.close').on('click', e =>{
+           $('#select').hide()
+    } )
+</script>
+{% endblock %}

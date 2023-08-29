@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}Loan{% endblock %}
+{% block content %}
+
+<div class="flex justify-center pt-10 text-[1.2rem] font-Medium">All Loans</div>
+<div class="flex justify-center p-2 ">
+    {% if loans[0] %}
+    <div class="max-md:w-11/12 w-1/2 p-2 bg-white border-2 rounded-2xl shadow-lg">
+        <table class="max-md:w-full table-fixed w-full bg-white rounded-2xl">
+            <tr class="max-sm:text-sm border-b-2 border-slate-500"><th class="p-2">User Name</th><th>Purpose</th><th>Loan status</th><th>amount</th><th>Sanctioned On</th></tr>
+            {% for loan in loans %}
+            <tr class="max-sm:text-sm text-center">
+                <!-- <td class="p-2">{{loan.id}}</td> -->
+                <td class="p-5">
+                    {% for user in users %}
+                    {% if user.id==loan.user_id %}
+                        {{user.username.capitalize()}}
+                        {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td class="truncate">{{loan.purpose.capitalize()}}</td>
+                    <td>{{loan.status.capitalize()}}</td>
+                    <td>{{loan.amount}}</td>
+                    <td>
+                        {% if loan.sanctioned_on==None %}
+                        {{ 'sanction Pending' }}
+                        {% else %}
+                        {{loan.sanctioned_on.strftime('%m/%d/%y')}}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+            {% else %}
+            <div class="w-3/5 rounded-2xl p-2 border-2 shadow-lg bg-white text-center mt-20"> No Loans made yet </div>
+        </div>
+        {% endif %}
+        {% endblock %}

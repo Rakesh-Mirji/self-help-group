@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+{% block title %}Self Help Group{% endblock %}
+{% block content %}
+  <div class="m-[5vw]"> 
+    <p class="text-5xl  text-shadow-lg drop-shadow-lg font-medium " >SELF HELP</p> 
+    <p class="text-5xl  text-shadow-lg drop-shadow-lg font-medium " >GROUP</p> 
+    <a href="{{ url_for('signin') }}"><p class="w-[100px] text-center mt-5 p-1 bg-black text-white text-[1.2rem]">Sign In</p></a>
+  </div>
+  <div class="h-[70vh] max-sm:hidden ">
+    <img src="/static/images/slider-img1.png" alt="" class="absolute bottom-0 right-0 w-[80%]">
+  </div>
+  <div class="w-3/4 h-3/4 " style="
+  mask-image: url(static/images/blog-featured-image-mask.svg);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-image: url(static/images/blog-featured-image-mask.svg);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  max-height: 700px;
+  display: block;
+  width: auto;
+  object-fit: cover">
+    <img src="/static/images/PCI-India_Womens-SHG.jpg" alt=""> 
+  </div>
+  <div class="flex justify-center">
+    <div class="w-3/4"    >
+    <p class="text-2xl font-medium leading-10">About Us</p>
+
+    <ul class="list-disc text-lg font-[1.5rem] leading-10">  
+      <li>The Self-Help Group and Rural Microfinance Project (SHGRM) is a  organization that works to empower women in rural India. We do this by providing them with access to financial services, training, and support.
+      </li>
+
+      <li>Our mission is to help women achieve financial independence and social change. We believe that when women have access to financial resources, they can improve their lives and the lives of their families.
+      </li>
+    <li>Our members have started their own businesses, improved their homes, and sent their children to school.
+  </li>
+<li>We are committed to helping women achieve their full potential. We believe that when women are empowered, they can change the world.
+</li>
+    </ul>
+      <p class="text-2xl font-medium  leading-10 pt-5">Our Values </p>
+      <ul class="list-disc text-lg font-[1.5rem] leading-10">
+      <li>Empowerment: We believe that women are capable of great things. We provide them with the resources and support they need to achieve their goals.
+      Education: We believe that education is essential for women's empowerment.</li>
+    </ul>
+      <p class="text-2xl font-medium leading-10 pt-5">How You Can Help</p>
+    <ul  class="list-disc text-lg font-[1.5rem] leading-10"> 
+    <li>There are many ways you can help the Self-Help Group and Rural Microfinance Project. You can donate money, volunteer your time, or spread the word about our work.
+    </li>
+  <li>Your support will help us continue to empower women in rural India. Thank you for your help!
+  </li>
+      </ul>
+    </div>
+  </div>
+  <div class="mx-10 max-sm:flex-wrap max-sm:mx-2 flex justify-evenly w-[95vw] ">
+    <img class="object-contain bg-no-repeat bg-contain w-[50vw]" src="/static/images/tree2.png" alt=""> 
+    <div class='flex justify-center items-center object-contain bg-no-repeat bg-contain w-full' >
+      <div class="">
+      <h3 class="text-2xl text-center font-medium leading-7">
+        Goal
+      </h3>
+      <h3 class="font-[1.5rem] text-center  leading-7">
+          Self-help groups are started by non-governmental organizations (NGO) that generally have 
+          broad anti-poverty agendas. Self-help groups are seen as instruments for goals including 
+          empowering women, developing leadership abilities among poor and the needy people, 
+          increasing school enrolments and improving nutrition and the use of birth control. Financial 
+          intermediation is generally seen more as an entry point to these other goals, rather than as a 
+          primary objective. This can hinder their development as sources of village capital, as well as 
+          their efforts to aggregate locally controlled pools of capital through federation, as was 
+          historically accomplished by credit unions
+      </h3>
+    </div>
+  </div>
+  </div>
+  <div class="mx-10 max-sm:flex-wrap max-sm:mx-2 flex justify-evenly w-[95vw]">
+    <div  class="flex items-center object-contain bg-no-repeat bg-contain w-full">
+      <div>
+      <h3 class="text-2xl text-center font-medium leading-7">
+        Structure of SHG 
+      </h3>
+      <h3 class="font-[1.5rem] text-center leading-7">
+        SHG (self help group) is a community based group with 10-25 members. They are usually 
+        women from similar social and economic backgrounds, all voluntarily coming together to 
+        save small sums of money, on a regular basis. They pool their resources to become 
+        financially stable, taking loans from their collective savings in times of emergency or financial scarcity, important life events or to purchase assets. The group members use 
+        collective wisdom and peer pressure to ensure proper end-use of credit and timely repayment.
+      </h3> 
+    </div> 
+  </div>
+    <img class='object-contain bg-no-repeat bg-contain w-[50vw]' src="/static/images/group3.png" alt="">
+  </div>
+  <div class="mx-10 max-sm:flex-wrap max-sm:flex-wrap max-sm:mx-2 flex justify-evenly w-[95vw]">
+    <img class='object-contain bg-no-repeat bg-contain w-[50vw]' src="/static/images/tree1.png" alt=""> 
+    <div class='flex items-center object-contain bg-no-repeat bg-contain w-full'>
+      <div>
+      <h3 class="text-2xl text-center font-medium  leading-7">
+        How You Can Help
+      </h3>  
+      <h3 class="font-[1.5rem] text-center leading-7 ">
+
+        There are many ways you can help the Self-Help Group and Rural Microfinance Project. You can donate money, volunteer your time, or spread the word about our work.
+        
+        Your support will help us continue to empower women in rural India. Thank you for your help!
+      </h3>
+    </div>
+  </div>
+  </div>
+  <div class=" relative h-[70vh] max-sm:h-[50vh] ">
+    <img src="static/images/img_1.png" alt="" class=" absolute left-20 bottom-20">
+    <div class=" absolute right-20 bottom-20">
+       <img src="static/images/footer_vector02.png" alt="" class=" ">
+       <img src="static/images/footer_vector03.png" alt="" class=" absolute bottom-[20%] animate-[spin_3s_linear_infinite]">
+    </div>
+    <div class="max-sm:left-[0%] overflow-x-hidden absolute left-[20%] bottom-20 w-screen">
+       <img src="static/images/footer_vector01.png" alt="" class="truck h-10">
+    </div>
+    </div>
+  {% endblock %}
+
+

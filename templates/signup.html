@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% block title %}Sign up{% endblock %}
 {% block content %}
-<div class="absolute top-[25%] left-[35%] ">
-<form class="px-10 p-5 border-2 border-black rounded-[10px] h-max w-max" id="signin" autocomplete="off" method="POST">
-    <h2 class="text-[3.5rem] font-bold ">Please sign up</h2>
+<div class="relative top-12 flex justify-center items-center">
+<form class="max-md:w-min max-md:border-transparent px-10 p-5 border-2 border-black rounded-[10px] h-max w-max " id="signin" autocomplete="off" method="POST">
+    <h2 class="max-md:text-3xl text-[3.5rem] font-bold ">Please sign up</h2>
     {% if message %}
     <p class="text-green-500" id="msg"><span class="" aria-hidden="true"></span>{{ message }}</p>
     {% endif %}
@@ -13,24 +13,24 @@
             }
         );
     </script>
-    <div class="flex justify-around items-center">
+    <div class="max-md:block flex justify-around items-center">
         <label class="text-[20px]">User Name : </label>
-        <input type="text" name="username" id="username" class="p-2 text-[15px] outline outline-offset-1 outline-slate-300 focus:outline-blue-500 m-3 rounded-lg" placeholder="Username" required autofocus>
+        <input type="text" name="username" id="username" class="p-2 text-[15px] outline outline-offset-1 outline-slate-300 focus:outline-amber-400 m-3 rounded-lg" placeholder="Username" required autofocus>
     </div>
-    <div class="flex justify-around items-center">
+    <div class="max-md:block flex justify-around items-center">
         <label class="text-[20px]">Password : </label>
-        <input type="password" name="password" id="password" class="p-2 text-[15px] outline outline-offset-1 outline-slate-300 focus:outline-blue-500 m-3 rounded-lg" placeholder="Password" required>
+        <input type="password" name="password" id="password" class="p-2 text-[15px] outline outline-offset-1 outline-slate-300 focus:outline-amber-400 m-3 rounded-lg" placeholder="Password" required>
     </div>
-    <div class="flex justify-around items-center">
+    <div class="max-md:block flex justify-around items-center">
         <label class="text-[20px]">Phone No : </label>
-        <input type="number" name="phone" id="phone" class="p-2 text-[15px] outline outline-offset-1 outline-slate-300 focus:outline-blue-500 m-3 rounded-lg" placeholder="1234567890" required>
+        <input type="number" name="phone" id="phone" class="p-2 text-[15px] outline outline-offset-1 outline-slate-300 focus:outline-amber-400 m-3 rounded-lg" placeholder="1234567890" required>
     </div>
-    <div class="flex justify-around items-center">
+    <div class="max-md:block flex justify-around items-center">
         <label class="text-[20px]">Address : </label>
-        <input type="text" name="address" id="address" class="p-2 text-[15px] outline outline-offset-1 outline-slate-300 focus:outline-blue-500 m-3 rounded-lg" placeholder="Location" required>
+        <input type="text" name="address" id="address" class="p-2 text-[15px] outline outline-offset-1 outline-slate-300 focus:outline-amber-400 m-3 rounded-lg" placeholder="Location" required>
     </div>
     <div class="mt-2 flex justify-around items-center ">
-        <input type="submit" value="Sign Up" class="rounded-lg w-1/2 p-3 font-[1rem] bg-blue-200 cursor-pointer border-2 border-blue-300">
+        <input type="submit" value="Sign Up" class="rounded-lg w-1/2 p-3 font-[1rem] bg-yellow-400 cursor-pointer border-4 hover:shadow-lg hover:border-yellow-400 border-yellow-300">
     </div>
 </form>
 </div>

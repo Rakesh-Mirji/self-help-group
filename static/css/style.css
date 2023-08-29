@@ -3,7 +3,17 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
+}
+.mask-news img {
+    mask-image: url('static/images/blog-featured-image-mask.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    -webkit-mask-image: url('static/images/blog-featured-image-mask.svg');
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
 }
 .hide{
     display: none;

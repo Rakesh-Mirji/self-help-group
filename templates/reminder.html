@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Reminder{% endblock %}
+{% block content %}
+
+<div class="min-h-[50vh] p-4 w-full flex justify-center items-center">
+    <div class="">
+        {% if nominees %}
+        {% for nominee in nominees %}
+        <div class="max-md:w-[90vw] mt-5 w-[40vw] p-4 bg-white border-2 rounded-2xl shadow-lg">
+            <span class="relative top-[5%] left-[95%] flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+            </span>
+            <p class="text-2xl">You have become a nominee to 
+                {% for user in users %}
+                {% if nominee.user_id == user.id %}
+                {{ user.username.capitalize() }}
+                {% endif %}
+                {% endfor %}
+            </p>
+            <p class="mt-10">The loan of  <span class="text-lg">₹ {{nominee.amount}}</span> has been Sanctioned to your benifactor on <span class="text-lg">{{nominee.sanctioned_on.strftime('%m/%d/%y')}}</span>. </p>
+            <p>Please remind them to repay the loan within 90 days</p>
+        </div>
+        {% endfor %}
+        {% else %}
+    </div>
+        <div class="w-3/5 rounded-2xl p-2 border-2 shadow-lg bg-white text-center mt-20">No new Reminders </div>
+        {% endif %}
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Text, LargeBinary,Boolean, Date
+from sqlalchemy import Column, ForeignKey, Integer, String, Text, LargeBinary,Boolean, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -41,7 +41,7 @@ class Account(Base):
     account_type = Column(String)
     balance = Column(Integer)
     status = Column(Text, default = Text("active"))
-    created_at=Column(Date)
+    created_at=Column(DateTime)
     UniqueConstraint("account_no","user_id")
 
 
@@ -61,17 +61,21 @@ class Loan_request(Base):
     __tablename__ = 'loan_request'
     id = Column(Integer, primary_key=True, autoincrement=True)
     purpose = Column(Text)
+    status = Column(String)
     user_id = Column(Integer , ForeignKey('users.id'))
     users = relationship(Users)
     amount = Column(Integer)
+    sanctioned_on = Column(DateTime)
 
     @property
     def serialise(self):
         return {
             'id' : self.id,
             'purpose' : self.purpose,
+            'status' : self.status,
             'user_id' : self.user_id,
-            'amount' : self.amount
+            'amount' : self.amount,
+            'sanctioned_on': self.sanctioned_on
             }
 
 class Loan(Base):
@@ -79,14 +83,11 @@ class Loan(Base):
     id=Column(Integer, primary_key=True, autoincrement=True)
     request_id=Column(Integer,ForeignKey('loan_request.id'))
     # request_amount=Column(Integer,ForeignKey('loan_request.amount'))
-    status=Column(String)
-    created_on=Column(Date)
-    nominee_1=Column(Integer, ForeignKey('users.id'))
-    nominee_2=Column(Integer, ForeignKey('users.id'))
+    created_on=Column(DateTime)
+    nominee_id=Column(Integer, ForeignKey('users.id'))
     
     request = relationship("Loan_request", foreign_keys=[request_id],backref="req")
-    nom1 = relationship("Users",foreign_keys=[nominee_1],backref="n1")
-    nom2 = relationship("Users",foreign_keys=[nominee_2],backref="n2")
+    nom1 = relationship("Users",foreign_keys=[nominee_id],backref="n1")
 
 
     @property
@@ -95,17 +96,15 @@ class Loan(Base):
             'id':self.id,
             'request_id':self.request_id,
             # 'request_amount':self.request_amount,
-            'status':self.status,
             'created_on':self.created_on,
-            'nominee_1':self.nominee_1,
-            'nominee_2':self.nominee_2
+            'nominee_id':self.nominee_id,
         }
 
 class Fin_trans(Base):
     __tablename__='fin_trans'
     id=Column(Integer, primary_key=True, autoincrement=True)
     user_acc=Column(Integer, ForeignKey('account.id'))
-    created_on=Column(Date)
+    created_on=Column(DateTime)
     transaction_amount=Column(Integer)
     transaction_from=Column(Integer,ForeignKey('account.id'))
     transaction_to=Column(Integer,ForeignKey('account.id'))
@@ -125,32 +124,12 @@ class Fin_trans(Base):
             'transaction_to':self.transaction_to
         }
     
-class Pinalty(Base):
-    __tablename__='pinalty'
-    id=Column(Integer,primary_key=True, autoincrement=True)
-    loan_id=Column(Integer,ForeignKey('loan.id'))
-    status=Column(String)
-    transaction_id=Column(Integer,ForeignKey('fin_trans.id'))
-    loan = relationship(Loan)
-    fin_trans = relationship(Fin_trans)
-
-
-    @property
-    def serialise(self):
-        return{
-            'id':self.id,
-            'loan_id':self.loan_id,
-            'status':self.status,
-            'transaction_id':self.transaction_id
-        }
-        
-    
 class Approver(Base):
     __tablename__='approver'
     id=Column(Integer,primary_key=True, autoincrement=True)
     user_id=Column(Integer,ForeignKey('users.id'))
     approver_id=Column(Integer,ForeignKey('users.id'))
-    approved_on=Column(Date)
+    approved_on=Column(DateTime)
     UniqueConstraint("user_id", "approver_id")
 
     approve_user = relationship("Users",foreign_keys=[user_id],backref="approv_user_id")
@@ -164,6 +143,24 @@ class Approver(Base):
             'approver_id':self.approver_id,
             'approved_on':self.approved_on,
         }
+
+class Chat(Base):
+    __tablename__ = 'chat'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer , ForeignKey('users.id'))
+    message = Column(Text)
+    date = Column(DateTime)
+    
+    users = relationship(Users)
+
+    @property
+    def serialise(self):
+        return {
+            'id' : self.id,
+            'user_id' : self.user_id,
+            'message' : self.message,
+            'date': self.date
+            }
 
 engine = create_engine('sqlite:///shg.db')
 Base.metadata.create_all(engine)
