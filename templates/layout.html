@@ -25,6 +25,7 @@
 }
  </style>
 </head>
+<<<<<<< HEAD
 <body  class="bg-[url('/static/images/slider-bg.jpg')] bg-fixed bg-cover bg-no-repeat min-h-[80vh] w-screen overflow-x-hidden">
    <header class="">
       <div class="close z-[200] md:hidden fixed top-10 right-10 text-white font-semibold text-2xl">X</div>
@@ -51,11 +52,29 @@
             <div class="text-center max-md:p-3"><a class="max-md:text-2xl max-md:font-medium max-lg:text-[1rem] text-[1.2rem]" href="{{ url_for('reminder') }}">Reminder</a></div>
             <div class="text-center max-md:p-3"><a class="max-md:text-2xl max-md:font-medium max-lg:text-[1rem] text-[1.2rem]" href="{{ url_for('chat') }}">Group Chat</a></div>
             <div class="text-center max-md:p-3"><a class="max-md:text-2xl max-md:font-medium max-lg:text-[1rem] text-[1.2rem]" href="{{ url_for('signout') }}">Sign Out</a></div>
+=======
+<body class="bg-[url('/static/images/slider-bg.jpg')] bg-fixed bg-cover bg-no-repeat min-h-[80vh] w-screen overflow-x-hidden">
+   <header class=" bg-lime-600 text-white h-16">
+      <nav class="h-full w-full" id="bs-example-navbar-collapse-1">
+         {% if 'user' in session %}
+         <ul class="h-full flex items-center justify-evenly  w-full">
+         {% else %}
+         <ul class="h-full flex items-center justify-start w-full">
+         {% endif %}
+            <a href="{{ url_for('about') }}">
+               <div class="p-2"><img class="rounded-full bg-white object-cover h-16 w-16" src="/static/images/icon.png" alt="SHG"></div>
+            </a>
+            {% if 'user' in session %}
+            <div class="max-lg:text-[1rem] text-[1.2rem]"><a href="{{ url_for('main') }}">Index</a></div>
+            <div class="max-lg:text-[1rem] text-[1.2rem]"><a href="{{ url_for('approve') }}">Approvals</a></div>
+            <div class="max-lg:text-[1rem] text-[1.2rem]"><a href="{{ url_for('signout') }}">Sign Out</a></div>
+>>>>>>> d62e9aa72717e4f88f362f4187197bbf20914bef
             {% endif %}
          </ul>
       </ul>
       </nav> 
       </header>
+<<<<<<< HEAD
       <script>
          $('.navigation').on( "click", e => {
             $('.menu').show()
@@ -66,6 +85,8 @@
             $('.navigation').removeClass("!animate-none")
          })
       </script>
+=======
+>>>>>>> d62e9aa72717e4f88f362f4187197bbf20914bef
       <div class="w-screen ">
          {% block content %}{% endblock %}
       </div>

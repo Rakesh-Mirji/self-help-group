@@ -52,14 +52,22 @@ try:
     session.commit()
     # userid=session.query(Users.id).filter(Users.username == 'admin',Users.phone == 1234567890,Users.password==hash_object.hexdigest()).all()
     # print(userid)
+<<<<<<< HEAD
     account = Account(account_no=int(random.random()*pow(10,8)),user_id=admin.id,account_type='SHG',balance=100000,status='active',created_at = datetime.now())
+=======
+    account = Account(account_no=int(random.random()*pow(10,6)),user_id=admin.id,account_type='SHG',balance=10000,status='active',created_at = datetime.now())
+>>>>>>> d62e9aa72717e4f88f362f4187197bbf20914bef
     session.add(account)
     session.commit()
 except:
     session.rollback()
+<<<<<<< HEAD
     print("An exception occurred")
 
 newUser('ross','1234',9876543210,'NYC')
 newUser('chandler','1234',8765432109,'Ocalhoma')
 newUser('rachel','1234',7654321089,'Bosten')
 newUser('monica','1234',6543207890,'NYC')
+=======
+    print("An exception occurred")
+>>>>>>> d62e9aa72717e4f88f362f4187197bbf20914bef

@@ -5,6 +5,7 @@
 <div class="">
     <h1 class="p-5 text-[1.7rem] font-semibold">Self Help Group</h1>
     <p class="p-5 text-[1.2rem] font-Medium ">Account Details</p>
+<<<<<<< HEAD
     <div class="flex justify-center ">
         <div class="shadow-lg hover:shadow-xl border-2 border-black rounded-2xl p-3 w-[30%] max-md:w-[85%] max-lg:w-[50%] bg-[url('/static/images/card1.jpg')] bg-left-bottom bg-cover bg-no-repeat">
             {% for data in account %}
@@ -29,6 +30,25 @@
         <tr class="max-md:text-sm border-b-2 border-slate-500"><th class="p-2">User Name</th><th>User Address</th><th>User Phone Number</th><th>Verified</th></tr>
         {% for user in users %}
         <tr class="max-md:text-sm p-5 text-center">
+=======
+    <table class="w-full bg-lime-400/80">
+    <tr class="border-b-2 border-slate-500"><th>Account Number</th><th>Account Balance</th><th>Account Status</th></tr>
+    {% for data in account %}
+        <tr class="p-5 text-center">
+            <td class="p-3">{{data.account_no}}</td>
+            <td>{{data.balance}}</td>
+            <td>{{data.status.capitalize()}}</td>
+        </tr>  
+    {% endfor %}
+</table>
+<div class="flex justify-center pt-10 text-[1.2rem] font-Medium">User Details</div>
+<div class="flex justify-center p-2 ">
+    {% if users %}
+    <table class="w-[70%] bg-white rounded-2xl">
+        <tr class="border-b-2 border-slate-500"><th class="p-2">User Name</th><th>User Address</th><th>User Phone Number</th><th>Verified</th></tr>
+        {% for user in users %}
+        <tr class="p-5 text-center">
+>>>>>>> d62e9aa72717e4f88f362f4187197bbf20914bef
             <td class="p-2">{{user.username.capitalize()}}</td>
             <td>{{user.address.capitalize()}}</td>
             <td>{{user.phone}}</td>

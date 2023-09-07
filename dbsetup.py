@@ -65,7 +65,11 @@ class Loan_request(Base):
     user_id = Column(Integer , ForeignKey('users.id'))
     users = relationship(Users)
     amount = Column(Integer)
+<<<<<<< HEAD
     sanctioned_on = Column(DateTime)
+=======
+    sanctioned_on = Column(Date)
+>>>>>>> d62e9aa72717e4f88f362f4187197bbf20914bef
 
     @property
     def serialise(self):
@@ -83,7 +87,12 @@ class Loan(Base):
     id=Column(Integer, primary_key=True, autoincrement=True)
     request_id=Column(Integer,ForeignKey('loan_request.id'))
     # request_amount=Column(Integer,ForeignKey('loan_request.amount'))
+<<<<<<< HEAD
     created_on=Column(DateTime)
+=======
+    status=Column(String)
+    created_on=Column(Date)
+>>>>>>> d62e9aa72717e4f88f362f4187197bbf20914bef
     nominee_id=Column(Integer, ForeignKey('users.id'))
     
     request = relationship("Loan_request", foreign_keys=[request_id],backref="req")
@@ -97,7 +106,11 @@ class Loan(Base):
             'request_id':self.request_id,
             # 'request_amount':self.request_amount,
             'created_on':self.created_on,
+<<<<<<< HEAD
             'nominee_id':self.nominee_id,
+=======
+            'nominee':self.nominee,
+>>>>>>> d62e9aa72717e4f88f362f4187197bbf20914bef
         }
 
 class Fin_trans(Base):
