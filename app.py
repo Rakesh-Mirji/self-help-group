@@ -15,7 +15,7 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
 dbsession = DBSession()
 userID={'id':''}
-minimun_requirement = 4
+minimun_requirement = 1
 
 # compare credentials with database
 def check_password(hashed_password, user_password, salt):
@@ -55,7 +55,7 @@ def signin():
     if request.method == 'POST':
         try:
             session.clear()
-            uname = request.form['username']
+            uname = request.form['username'].lower()
             pword = request.form['password']
             role = request.form['role'].lower()
             completion = validate(uname, pword,role)
@@ -88,7 +88,7 @@ def signup():
             
             salt = urandom(8)
             hash_object = hashlib.sha256(pword.encode() + salt)
-            new_user = Users(username=uname, password=hash_object.hexdigest(), address=address, phone=int(phone),role='user',salt=salt,verified=False)
+            new_user = Users(username=uname.lower(), password=hash_object.hexdigest(), address=address, phone=int(phone),role='user',salt=salt,verified=False)
             dbsession.add(new_user)
             dbsession.commit()
             account = Account(account_no = int(random.random()*pow(10,8)),user_id=new_user.id,account_type='user',balance=3000,status='active',created_at = datetime.now())
@@ -124,14 +124,14 @@ def main():
 def approve():
     if 'user' in session: # check for user session
         if request.method == 'POST':
+            verifed_id = request.form['user_id']
             try:
-                verifed_id = request.form['user_id']
                 # User can only be approved once
                 if not len(dbsession.query(Approver.id).filter(Approver.user_id == verifed_id, Approver.approver_id == session['id']).all()) > 0 :
                     new_approval = Approver( user_id=int(verifed_id), approver_id = int(session['id']) ,approved_on=datetime.now())
                     dbsession.add(new_approval)
                     dbsession.commit()
-                    approved = dbsession.query(Approver.user_id).group_by(Approver.user_id).having(func.count(Approver.user_id) >= minimun_requirement).all() 
+                    approved = dbsession.query(Approver.user_id).group_by(Approver.user_id).having(func.count(Approver.user_id) > minimun_requirement).all() 
                     if len(approved)>0:
                         for item in approved:
                             user = int(*item)
@@ -165,6 +165,7 @@ def requests():
             except:
                 dbsession.rollback()
                 print("An exception occurred")
+            return redirect(url_for('requests'))
         return render_template('loanRequest.html')
     return redirect(url_for('about'))
 
@@ -187,7 +188,7 @@ def view():
                     new_loan = Loan(request_id=int(request_id), nominee_id = int(session['id']) ,created_on=datetime.now())
                     dbsession.add(new_loan)
                     dbsession.commit()
-                    approved = dbsession.query(Loan_request.id).filter(Loan_request.status=='pending').group_by(Loan_request.id).having(func.count(Loan_request.id) >= minimun_requirement).all()
+                    approved = dbsession.query(Loan_request.id).join(Loan).filter(Loan_request.status=='pending').group_by(Loan.request_id).having(func.count(Loan.request_id) > minimun_requirement).all()
                     print(approved)
                     if len(approved) > 0 :
                         for item in approved:
@@ -201,8 +202,10 @@ def view():
             except:
                 dbsession.rollback()
                 print("An exception occurred")
+            return redirect(url_for('view'))
+        users = dbsession.query(Users)
         requests = dbsession.query(Loan_request).filter(Loan_request.status == 'pending',Loan_request.user_id != session['id']).all()
-        return render_template('view.html', requests = requests)
+        return render_template('view.html', requests = requests, users = users)
     return redirect(url_for('about'))
 
 
@@ -228,13 +231,15 @@ def chat():
     if 'user' in session:
         if request.method == 'POST':
             message = request.form['message']
-            try:
-                new_chat = Chat(user_id = session['id'], message=message , date=datetime.now())
-                dbsession.add(new_chat)
-                dbsession.commit()
-            except:
-                dbsession.rollback()
-                print("An exception occurred in chat")
+            if len(message.strip()) > 0 :
+                try:
+                    new_chat = Chat(user_id = session['id'], message=message , date=datetime.now())
+                    dbsession.add(new_chat)
+                    dbsession.commit()
+                except:
+                    dbsession.rollback()
+                    print("An exception occurred in chat")
+            return redirect(url_for('chat'))
 
         users = dbsession.query(Users)
         chats = dbsession.query(Chat).order_by(Chat.date.desc())
@@ -265,6 +270,7 @@ def loan():
                 except:
                     dbsession.rollback()
                     print("An exception occurred")
+                return redirect(url_for('loan'))
             return render_template( 'userLoan.html', loans = loan_req ,all_users = all_users, nomines = nomines )
     return redirect(url_for('about'))
 

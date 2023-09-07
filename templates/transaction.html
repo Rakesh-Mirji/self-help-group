@@ -16,7 +16,7 @@
                     {% endif %}
                     <p class="text-xs">On {{ fin.created_on.strftime('%d %b %y, %I:%M%p') }} </p>
                 </div>
-                <p class="font-bold text-xl">{{ '- ' if fin.user_acc == session['id'] else '+ ' }}  {{ fin.transaction_amount }}</p>
+                <p class="font-bold text-xl">{{ '- ' if fin.user_acc == session['id'] else '+ ' }} ₹ {{ fin.transaction_amount }}</p>
             </div>
             {% endfor %}
             {% else %}

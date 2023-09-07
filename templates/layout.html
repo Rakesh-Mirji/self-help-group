@@ -59,9 +59,11 @@
       <script>
          $('.navigation').on( "click", e => {
             $('.menu').show()
+            $('.navigation').addClass("!animate-none")
          })
          $('.close').on( "click", e => {
             $('.menu').hide()
+            $('.navigation').removeClass("!animate-none")
          })
       </script>
       <div class="w-screen ">

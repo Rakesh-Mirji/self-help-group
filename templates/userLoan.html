@@ -5,14 +5,14 @@
 <div class="flex justify-center pt-10 text-[1.2rem] font-Medium">My Loan</div>
 <div class="flex justify-center p-2">
     {% if loans[0] %}
-    <table class="max-md:w-full table-fixed w-[70%] bg-white/60 rounded-2xl">
+    <table class="max-md:w-full table-fixed w-[70%] bg-white rounded-2xl shadow-lg">
     <tr class="max-md:text-sm border-b-2 border-slate-500"><th class="p-2">Loan Purpose</th><th>Status</th><th>Amount</th><th class="max-md:hidden">Loan Sanctioned on</th><th>Nominee's</th><th>View</th></tr>
 {% for loan in loans %}
 <tr class="max-md:text-sm detail p-5 text-center">
     <td data-value = {{loan.purpose}} class="truncate w-10 p-5">{{loan.purpose}}</td>
     <td data-value = {{loan.status}} >{{loan.status}}</td>
-    <td data-value = {{loan.amount}}>{{loan.amount}}</td>
-    <td class="max-md:hidden" data-value = {{loan.sanctioned_on}}>{{loan.sanctioned_on.strftime('%m/%d/%y')}}</td>
+    <td data-value = {{loan.amount}}>₹ {{loan.amount}}</td>
+    <td class="max-md:hidden" data-value = {{loan.sanctioned_on}}>{{loan.sanctioned_on.strftime('%x') if loan.sanctioned_on else loan.sanctioned_on }}</td>
     <td>
         {% for nominee in nomines %}
             {% for user in all_users %}

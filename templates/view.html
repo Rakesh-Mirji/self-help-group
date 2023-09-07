@@ -6,13 +6,20 @@
     <div class="max-md:w-[90vw] w-1/2 p-2 bg-white border-2 rounded-2xl shadow-lg">
         <table class="table-fixed w-full">
             {% if requests %}
-            <tr class=" border-t-2 "><th class="p-5">Purpose</th><th class="p-5">Status</th><th class="p-5">Amount</th><th>Approve</th></th></tr>
+            <tr class=" border-t-2 "><th>Name</th><th class="p-5">Purpose</th><th class="p-5">Status</th><th class="p-5">Amount</th><th>Approve</th></th></tr>
             {% for request in requests %}
             <tr class=" user border-t-2 text-center">
+                <td>
+                    {% for user in users %}
+                        {% if user.id==request.user_id %}
+                            {{user.username.capitalize()}}
+                        {% endif %}
+                    {% endfor %}
+                </td>
                 <td class="hidden"  data-value = {{request.user_id}}>{{ request.user_id }}</td>
                 <td  data-value = {{request.purpose}} class="truncate p-5">{{ request.purpose }}</td>
                 <td  data-value = {{request.status}}>{{ request.status }}</td>
-                <td  data-value = {{request.amount}}>{{ request.amount }}</td>
+                <td  data-value = {{request.amount}}>₹ {{ request.amount }}</td>
                 <td><button data-value = {{request.id}}  class = "btn -mx-2 hover:brightness-90 text-white bg-blue-500 p-1 px-3 border-2 shadow-lg rounded-lg">Approve</button> </td>
             </tr>
             {% endfor %}

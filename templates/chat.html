@@ -15,11 +15,11 @@
                         </div>
                         {% else %}
                         <div class="p-3 m-2 max-w-[60vw] self-start text-white bg-slate-700 border-2 rounded-b-2xl rounded-tr-2xl">
-                            <div class="flex justify-between gap-5 ">
+                            <div class="text-[12px] flex justify-between gap-3 ">
                                 {% for user in users %}
                                     {% if chat.user_id==user.id %}
-                                        <span class="font-medium"><em>{{user.username}}</em></span>
-                                        <span class="text-slate-300">+91 {{user.phone}}</span>
+                                        <span class="truncate max-w-[20vw] font-medium"><em>{{user.username}}</em></span>
+                                        <span class=" text-slate-300">+91 {{user.phone}}</span>
                                     {% endif %}
                                 {% endfor %}
                             </div>
